@@ -1,30 +1,45 @@
--#include <stdio.h>
-#include <math.h> // Para la función pow()
+#include <stdio.h>
 
 int main() {
-    int meses;
-    float interes = 0.00583; // Tasa de interés mensual
+    double credito, tasaInteres, interesAnual, totalIntereses = 0;
+    double cuotaMensual, inversion;
+    int años;
 
-    printf("Ingrese el número de meses: ");
-    scanf("%d", &meses);
+    printf("Ingrese monto del crédito: ");
+    scanf("%lf", &credito);
 
-    float valores[meses + 1]; // Arreglo para almacenar los valores
+    printf("Ingrese la tasa de interés: ");
+    scanf("%lf", &tasaInteres);
 
-    // Inicialización del arreglo con valores en cero
-    for (int i = 0; i <= meses; i++) {
-        valores[i] = 0;
+    printf("Ingrese el número de años: ");
+    scanf("%d", &años);
+
+    printf("\nAño\tInterés\tCuota Mensual Anual\tInversión\n");
+
+    double cuotaMensualAnual = credito / años; // Calcula la cuota 
+               //mensual anual
+
+    for(int i = 1; i <= años; i++) {
+        interesAnual = (credito * tasaInteres) / 100;
+        totalIntereses += interesAnual;
+
+        cuotaMensual = cuotaMensualAnual - (totalIntereses / (credito 
+           / 100)); // Calcula la cuota mensual
+        credito -= cuotaMensualAnual; // Descuenta la cuota mensual 
+                   //anual del crédito
+
+        inversion = totalIntereses / 100 * 0.5; // Calcula la 
+                 //inversión por cada 100 dólares de interés
+        totalIntereses -= inversion * 100; // Resta la inversión del 
+                   //total de intereses
+
+        printf("%d\t%.2lf\t%.2lf\t\t\t%.2lf\n", i, interesAnual, cuotaMensual, inversion);
     }
 
-    // Ingreso de valores para cada mes
-    for (int i = 1; i <= meses; i++) {
-        printf("Ingrese el valor para el mes %d: ", i);
-        scanf("%f", &valores[i]);
-    }
+    printf("\nTotal Intereses: %.2lf\n", totalIntereses);
 
-    // Cálculo de valores con el interés usando la función pow()
-    for (int i = 1; i <= meses; i++) {
-        valores[i] *= pow(1 + interes, 1);
-    }
+    return 0;
+}
 
     // Imprimir la tabla en columnas
     printf("\nMes\tValor inicial\tValor con interés\n");
