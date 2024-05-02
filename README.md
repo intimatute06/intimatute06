@@ -40,13 +40,3 @@ int main() {
 
     return 0;
 }
-
-    // Imprimir la tabla en columnas
-    printf("\nMes\tValor inicial\tValor con interés\n");
-    printf("--------------------------------------\n");
-    for (int i = 1; i <= meses; i++) {
-        printf("%d\t%.2f\t\t%.2f\n", i, valores[i] / (1 + interes), valores[i]);
-    }
-
-    return 0;
-}
